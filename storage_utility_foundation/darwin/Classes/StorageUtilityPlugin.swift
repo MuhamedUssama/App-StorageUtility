@@ -20,7 +20,8 @@ public class StorageUtilityPlugin: NSObject, FlutterPlugin {
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-    let path: String? =
+    let args = call.arguments as? [String: Any]
+    let path: String? = (args?["path"] as? String) ??
       NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
 
     switch call.method {

@@ -19,16 +19,26 @@ class MockStorageUtilityPlatform
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  test('getFreeBytes', () async {
+  test('getFreeBytes without path', () async {
     PathProviderPlatform.instance = FakePathProviderPlatform();
     StorageUtilityPlatform.instance = MockStorageUtilityPlatform();
     expect(await getFreeBytes(), 42);
   });
 
-  test('getTotalBytes', () async {
+  test('getFreeBytes with custom path', () async {
+    StorageUtilityPlatform.instance = MockStorageUtilityPlatform();
+    expect(await getFreeBytes(path: '/custom/path'), 42);
+  });
+
+  test('getTotalBytes without path', () async {
     PathProviderPlatform.instance = FakePathProviderPlatform();
     StorageUtilityPlatform.instance = MockStorageUtilityPlatform();
     expect(await getTotalBytes(), 84);
+  });
+
+  test('getTotalBytes with custom path', () async {
+    StorageUtilityPlatform.instance = MockStorageUtilityPlatform();
+    expect(await getTotalBytes(path: '/custom/path'), 84);
   });
 }
 
